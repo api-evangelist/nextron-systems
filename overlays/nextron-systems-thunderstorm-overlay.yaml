@@ -1,0 +1,35 @@
+overlay: 1.0.0
+info:
+  title: Nextron Systems THOR Thunderstorm API enhancements
+  version: 1.0.0
+  x-generated: '2026-10-09'
+  x-method: generated
+extends: ../openapi/_original/nextron-systems-thunderstorm-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-provider: Nextron Systems
+    x-api-evangelist-aid: nextron-systems:thor-thunderstorm-api
+    contact:
+      name: Nextron Systems
+      url: https://www.nextron-systems.com/
+    x-documentation: https://thor-manual.nextron-systems.com/en/latest/usage/deployment.html#thor-thunderstorm-service
+- target: $.servers[0]
+  update:
+    x-self-hosted: true
+    x-note: Thunderstorm runs on the customer's own THOR instance; replace host and port with your deployment.
+- target: $.paths['/check'].post
+  update:
+    x-agent-hint: Synchronous scan; blocks until THOR finishes. Prefer checkAsync for large files or bulk submission.
+- target: $.paths['/checkAsync'].post
+  update:
+    x-agent-hint: Returns a sample id; poll getAsyncResults with that id until the result is complete.
+- target: $.paths['/getAsyncResults'].get
+  update:
+    x-agent-hint: Poll with the id returned from checkAsync.
+- target: $.paths['/info'].get
+  update:
+    x-agent-hint: Read-only; safe to call to discover THOR version and configuration.
+- target: $.paths['/status'].get
+  update:
+    x-agent-hint: Read-only; live load/queue information, useful before submitting batches.

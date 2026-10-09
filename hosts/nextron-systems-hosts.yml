@@ -1,0 +1,216 @@
+generated: '2026-10-09'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 18
+  own: 14
+  other_domain: 0
+  platform: 4
+  roles:
+  - api
+  - identity
+  - other
+  - source
+  - support
+  - website
+hosts:
+- host: analysis-cockpit-manual.nextron-systems.com
+  found_by:
+  - apis[]
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - docs
+  registrable_domain: nextron-systems.com
+  role: other
+  relation: own
+- host: api.nextron-systems.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: nextron-systems.com
+  role: api
+  relation: own
+- host: asgard-manual.nextron-systems.com
+  found_by:
+  - apis[]
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - docs
+  registrable_domain: nextron-systems.com
+  role: other
+  relation: own
+- host: aurora-agent-manual.nextron-systems.com
+  found_by:
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: nextron-systems.com
+  role: other
+  relation: own
+- host: broker-network-manual.nextron-systems.com
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: nextron-systems.com
+  role: other
+  relation: own
+- host: elasticsearch-cluster-manual.nextron-systems.com
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: nextron-systems.com
+  role: other
+  relation: own
+- host: feature-request.nextron-systems.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - FeatureRequests
+  serves: []
+  registrable_domain: nextron-systems.com
+  role: other
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - SpectralRules
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: knowledge.nextron-systems.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - HelpCenter
+  serves: []
+  registrable_domain: nextron-systems.com
+  role: other
+  relation: own
+- host: log-analysis-manual.nextron-systems.com
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: nextron-systems.com
+  role: other
+  relation: own
+- host: portal.nextron-systems.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - docs-index
+  types:
+  - Login
+  serves:
+  - docs
+  registrable_domain: nextron-systems.com
+  role: identity
+  relation: own
+- host: security-center-manual.nextron-systems.com
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: nextron-systems.com
+  role: other
+  relation: own
+- host: support.nextron-systems.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  types:
+  - Support
+  serves: []
+  registrable_domain: nextron-systems.com
+  role: support
+  relation: own
+- host: thor-manual.nextron-systems.com
+  found_by:
+  - apis[]
+  - probed
+  - site-links
+  types: []
+  serves:
+  - docs
+  registrable_domain: nextron-systems.com
+  role: other
+  relation: own
+- host: twitter.com
+  found_by:
+  - pointer
+  types:
+  - Twitter
+  serves: []
+  registrable_domain: twitter.com
+  role: other
+  relation: platform
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: www.nextron-systems.com
+  found_by:
+  - pointer
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  types:
+  - Website
+  - Documentation
+  - Blog
+  - GettingStarted
+  - Newsroom
+  - PrivacyPolicy
+  - Imprint
+  serves:
+  - docs
+  registrable_domain: nextron-systems.com
+  role: website
+  relation: own
+- host: www.youtube.com
+  found_by:
+  - pointer
+  types:
+  - YouTube
+  serves: []
+  registrable_domain: youtube.com
+  role: other
+  relation: platform

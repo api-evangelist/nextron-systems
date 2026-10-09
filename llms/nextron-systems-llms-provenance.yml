@@ -1,0 +1,6 @@
+generated: '2026-10-09'
+method: probed
+generator: harvest-llms.py
+source: https://www.nextron-systems.com/llms.txt
+bytes: 3166
+note: saved verbatim; the provider's own document

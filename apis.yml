@@ -1,23 +1,230 @@
 aid: nextron-systems
+
 name: Nextron Systems
-description: 'Nextron Systems is a company surfaced via the API Evangelist harvest backlog (source: spectral-ruleset-github)
-  and added to the network as a stub for full-pipeline profiling.'
+
+description: Nextron Systems (Nextron Systems GmbH) builds automated forensic analysis and compromise assessment tooling under the tagline "We
+  Detect Hackers". Its products include the THOR scanner, THOR Lite, THOR Cloud, THOR Thunderstorm (a web service that scans uploaded samples,
+  with an OpenAPI description published on GitHub), ASGARD Management Center, Analysis Cockpit and the Aurora agent, used to uncover traces of
+  hacking activity, configuration backdoors and obfuscated malware across diverse systems including legacy and edge devices.
+
 url: https://raw.githubusercontent.com/api-evangelist/nextron-systems/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:spectral-ruleset-github
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-09 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-10-09'
+
 modified: '2026-10-09'
+
 tags:
 - Company
-apis: []
+- Cybersecurity
+- Forensics
+- Compromise Assessment
+- Threat Detection
+- Malware Analysis
+- Incident Response
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
+image: https://www.nextron-systems.com/wp-content/uploads/2025/10/social-media-large-image-3.png
+
 common:
+- type: AgenticAccess
+  url: agentic-access/nextron-systems-agentic-access.yml
+- type: Spectral
+  url: rules/nextron-systems-thunderstorm-openapi-spectral-rules.yml
+- type: Spectral
+  url: rules/nextron-systems-rules.yml
+- type: JSONLD
+  url: json-ld/nextron-systems-context.jsonld
+- type: Vocabulary
+  url: vocabulary/nextron-systems-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/nextron-systems-data-model.yml
+- type: CLI
+  url: cli/nextron-systems-cli.yml
+- type: Conventions
+  url: conventions/nextron-systems-conventions.yml
+- type: Authentication
+  url: authentication/nextron-systems-authentication.yml
+- type: Deprecation
+  url: lifecycle/nextron-systems-lifecycle.yml
+- type: Lifecycle
+  url: lifecycle/nextron-systems-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/nextron-systems-problem-types.yml
+- type: Conformance
+  url: conformance/nextron-systems-conformance.yml
+- type: Overlay
+  url: overlays/nextron-systems-thunderstorm-overlay.yaml
+- type: LLMsTxt
+  url: llms/nextron-systems-llms.txt
+- type: Hosts
+  url: hosts/nextron-systems-hosts.yml
+- type: SDKs
+  url: packages/nextron-systems-packages.yml
+- type: Packages
+  url: packages/nextron-systems-packages.yml
+- type: DomainSecurity
+  url: security/nextron-systems-domain-security.yml
 - type: Website
   url: https://www.nextron-systems.com/
+- type: SpectralRules
+  url: https://github.com/NextronSystems/thunderstorm-openapi/blob/10b0ca0f8b85a02facf67ef5f07131e239ba460d/.spectral.yaml
+- type: Documentation
+  url: https://www.nextron-systems.com/resources/manuals/
+- type: Blog
+  url: https://www.nextron-systems.com/blog/
+- type: GettingStarted
+  url: https://www.nextron-systems.com/get-started/
+- type: Support
+  url: https://support.nextron-systems.com/
+- type: HelpCenter
+  url: https://knowledge.nextron-systems.com/
+- type: GitHubOrganization
+  url: https://github.com/NextronSystems
+- type: Login
+  url: https://portal.nextron-systems.com/
+- type: FeatureRequests
+  url: https://feature-request.nextron-systems.com/
+- type: Newsroom
+  url: https://www.nextron-systems.com/category/press/
+- type: PrivacyPolicy
+  url: https://www.nextron-systems.com/privacy/
+- type: Imprint
+  url: https://www.nextron-systems.com/imprint/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/nextron-systems
+- type: Twitter
+  url: https://twitter.com/nextronsystems
+- type: YouTube
+  url: https://www.youtube.com/channel/UC9lFYoA9MAFhnAzX-AtXFxw
+
+apis:
+- aid: nextron-systems:analysis-cockpit-api
+  name: Analysis Cockpit API
+  description: >-
+    The Analysis Cockpit (v4) API; per the manual, "The API documentation has been integrated into the
+    web interface. You can find it in the top right corner's help menu." The reference is served only
+    inside a customer's appliance, so no public contract or base URL is published.
+  humanURL: https://analysis-cockpit-manual.nextron-systems.com/en/latest/administration/api.html
+  tags:
+  - Forensics
+  properties:
+  - type: Documentation
+    url: https://analysis-cockpit-manual.nextron-systems.com/en/latest/administration/api.html
+- aid: nextron-systems:asgard-management-center-api
+  name: ASGARD Management Center API
+  description: >-
+    The (Master) Management Center API; per the ASGARD manual it "is documented in the API Documentation
+    section and resembles the API in Management Centers", i.e. inside the appliance web UI, so no public
+    contract or base URL is published.
+  humanURL: >-
+    https://asgard-manual.nextron-systems.com/en/latest/master-mc/master-mc.html#master-management-center-api
+  tags:
+  - Endpoint Management
+  properties:
+  - type: Documentation
+    url: >-
+      https://asgard-manual.nextron-systems.com/en/latest/master-mc/master-mc.html#master-management-center-api
+- aid: nextron-systems:nextron-systems-info-api
+  name: Nextron Systems Info API
+  description: Endpoints to retrieve information about the running THOR instance
+  humanURL: >-
+    https://thor-manual.nextron-systems.com/en/latest/usage/deployment.html#thor-thunderstorm-service
+  baseURL: http://localhost:8080/api/v1
+  tags:
+  - info
+  properties:
+  - type: OpenAPI
+    url: openapi/nextron-systems-info-api-openapi.yml
+  - type: Documentation
+    url: https://nextronsystems.github.io/thunderstorm-openapi/
+  - type: GitHubRepository
+    url: https://github.com/NextronSystems/thunderstorm-openapi
+  - type: JSONSchema
+    url: json-schema/nextron-systems-thor-report-schema.json
+  - type: JSONSchema
+    url: json-schema/nextron-systems-async-result-schema.json
+  - type: JSONSchema
+    url: json-schema/nextron-systems-thunderstorm-info-schema.json
+  - type: JSONSchema
+    url: json-schema/nextron-systems-thunderstorm-status-schema.json
+  - type: JSONSchema
+    url: json-schema/nextron-systems-sample-id-obj-schema.json
+- aid: nextron-systems:nextron-systems-results-api
+  name: Nextron Systems Results API
+  description: Endpoints to retrieve results of asynchronous scans
+  humanURL: >-
+    https://thor-manual.nextron-systems.com/en/latest/usage/deployment.html#thor-thunderstorm-service
+  baseURL: http://localhost:8080/api/v1
+  tags:
+  - results
+  properties:
+  - type: OpenAPI
+    url: openapi/nextron-systems-results-api-openapi.yml
+  - type: Documentation
+    url: https://nextronsystems.github.io/thunderstorm-openapi/
+  - type: GitHubRepository
+    url: https://github.com/NextronSystems/thunderstorm-openapi
+  - type: JSONSchema
+    url: json-schema/nextron-systems-thor-report-schema.json
+  - type: JSONSchema
+    url: json-schema/nextron-systems-async-result-schema.json
+  - type: JSONSchema
+    url: json-schema/nextron-systems-thunderstorm-info-schema.json
+  - type: JSONSchema
+    url: json-schema/nextron-systems-thunderstorm-status-schema.json
+  - type: JSONSchema
+    url: json-schema/nextron-systems-sample-id-obj-schema.json
+- aid: nextron-systems:nextron-systems-scan-api
+  name: Nextron Systems Scan API
+  description: Endpoints to scan files with THOR
+  humanURL: >-
+    https://thor-manual.nextron-systems.com/en/latest/usage/deployment.html#thor-thunderstorm-service
+  baseURL: http://localhost:8080/api/v1
+  tags:
+  - scan
+  properties:
+  - type: OpenAPI
+    url: openapi/nextron-systems-scan-api-openapi.yml
+  - type: Documentation
+    url: https://nextronsystems.github.io/thunderstorm-openapi/
+  - type: GitHubRepository
+    url: https://github.com/NextronSystems/thunderstorm-openapi
+  - type: JSONSchema
+    url: json-schema/nextron-systems-thor-report-schema.json
+  - type: JSONSchema
+    url: json-schema/nextron-systems-async-result-schema.json
+  - type: JSONSchema
+    url: json-schema/nextron-systems-thunderstorm-info-schema.json
+  - type: JSONSchema
+    url: json-schema/nextron-systems-thunderstorm-status-schema.json
+  - type: JSONSchema
+    url: json-schema/nextron-systems-sample-id-obj-schema.json
+x-enrichment:
+  date: '2026-10-09'
+  status: enriched
+  artifacts_added: 34
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic
+x-coverage:
+  state: covered
+  reason: identity-verified
+  detail: 'Enriched 2026-10-09: website and identity verified (verified) from the provider''s own pages; probed URLs below.'
+  evidence:
+  - url: https://www.nextron-systems.com/
+    status: 200

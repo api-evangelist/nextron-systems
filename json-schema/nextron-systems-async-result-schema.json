@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/nextron-systems/main/json-schema/nextron-systems-async-result-schema.json",
+  "title": "AsyncResult",
+  "description": "Result object for asynchronous scan operations",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/AsyncResult",
+  "type": "object",
+  "properties": {
+    "status": {
+      "description": "Current status of the scan",
+      "type": "string"
+    },
+    "result": {
+      "$ref": "#/$defs/ThorReport"
+    }
+  },
+  "required": [
+    "status"
+  ],
+  "$defs": {
+    "ThorFinding": {
+      "description": "THOR Finding",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "ThorReport": {
+      "description": "THOR Report containing findings",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ThorFinding"
+      }
+    }
+  }
+}

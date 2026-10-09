@@ -1,0 +1,215 @@
+openapi: 3.2.0
+info:
+  title: Nextron Systems Scan API
+  version: 1.0.0
+  description: 'Operations tagged scan across 2 of this provider''s published API definitions: nextron-systems-thunderstorm-openapi.yaml, nextron-systems-thunderstorm-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: http://localhost:8080/api/v1
+  description: Local THOR instance
+tags:
+- name: Scan
+  description: Endpoints to scan files with THOR
+paths:
+  /check:
+    post:
+      summary: Check a file with THOR
+      tags:
+      - Scan
+      operationId: check
+      parameters:
+      - $ref: '#/components/parameters/SampleSource'
+      requestBody:
+        $ref: '#/components/requestBodies/FileUpload'
+      responses:
+        '200':
+          description: Returns a list of findings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThorReport'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:8080/api/v1
+      description: Local THOR instance
+  /checkAsync:
+    post:
+      summary: Check a file with THOR asynchronously
+      tags:
+      - Scan
+      operationId: checkAsync
+      parameters:
+      - $ref: '#/components/parameters/SampleSource'
+      requestBody:
+        $ref: '#/components/requestBodies/FileUpload'
+      responses:
+        '200':
+          description: Returns a map containing the sample ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SampleIdObj'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    servers:
+    - url: http://localhost:8080/api/v1
+      description: Local THOR instance
+components:
+  schemas:
+    SampleId:
+      description: Sample ID returned for an asynchronous scan request
+      type: integer
+      format: int64
+      example: 12345
+    ThorReport:
+      description: THOR Report containing findings
+      type: array
+      items:
+        $ref: '#/components/schemas/ThorFinding'
+      example:
+      - type: THOR finding
+        meta:
+          time: '2026-01-16T13:35:34.11133172+01:00'
+          level: Alert
+          module: HTTPServer
+          scan_id: S-qkQv5yHIUHk-2
+          hostname: 127.0.0.1
+        message: Malicious file found
+        subject:
+          type: file
+          path: somefile.exe
+          exists: 'yes'
+          extension: .exe
+          magic_header: EXE
+          hashes:
+            md5: 7168892693d7716220d98883fffd848c
+            sha1: 42acd9b554e1c843a9f8139022b560de0bf48682
+            sha256: 660464c473c47784d8820d3e268c0d1327ac22ce0e607dc35e858628c53f0687
+          first_bytes:
+            hex: 4d5a90000300000004000000ffff0000b8000000
+            ascii: MZ
+          size: 1352192
+          permissions: null
+          content:
+            type: sparse data
+            elements:
+            - offset: 856110
+              data: '>`ncrypt.dll'
+            length: 1352192
+        score: 94
+        reasons:
+        - type: reason
+          summary: some YARA rule
+          signature:
+            score: 85
+            reference:
+            - Internal Research
+            origin: internal
+            kind: YARA Rule
+            date: '2023-05-12'
+            tags:
+            - EXE
+            - HKTL
+            rule_name: Some_Rule_Name
+            description: Detects Something
+          matched:
+          - data: '%*s**CREDENTIAL**'
+            offset: 918480
+            field: /content
+          - data: '%*s  Persist        : %08x - %u - %s'
+            offset: 919056
+            field: /content
+          - data: '%*s**DOMAINKEY**'
+            offset: 950688
+            field: /content
+        - type: reason
+          summary: Another rule
+          signature:
+            score: 80
+            reference:
+            - Some reference
+            origin: internal
+            kind: YARA Rule
+            date: '2016-02-05'
+            tags:
+            - T1059_001
+            rule_name: Another_Rule_Name
+            description: Detects Something other
+          matched:
+          - data: kuhl_m_lsadump_getUsersAndSamKey ; kull_m_registry_RegOpenKeyEx SAM Accounts (0x%08x)
+            offset: 1100540
+            field: /content
+          - data: kuhl_m_lsadump_getComputerAndSyskey ; kuhl_m_lsadump_getSyskey KO
+            offset: 1099708
+            field: /content
+        reason_count: 28
+        context: null
+        log_version: v3.0.0
+    Error:
+      description: Error with message
+      type: object
+      properties:
+        message:
+          description: Error message describing the problem
+          type: string
+      required:
+      - message
+    SampleIdObj:
+      description: Object containing the Sample ID returned for an asynchronous scan request
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/SampleId'
+      required:
+      - id
+      example:
+        id: 12345
+    ThorFinding:
+      description: THOR Finding
+      type: object
+      additionalProperties: true
+    FileObject:
+      description: Wrapped file
+      type: object
+      properties:
+        file:
+          description: File to be checked
+          type: string
+          format: binary
+      required:
+      - file
+  requestBodies:
+    FileUpload:
+      required: true
+      description: Multipart form data containing a file
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/FileObject'
+  responses:
+    InternalServerError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid parameters given
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    SampleSource:
+      description: Specify source for the THOR log
+      name: source
+      in: query
+      schema:
+        type: string
+x-refined-from:
+- nextron-systems-thunderstorm-openapi.yaml
+- nextron-systems-thunderstorm-openapi.yml

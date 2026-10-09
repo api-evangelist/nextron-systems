@@ -1,0 +1,27 @@
+{
+  "provider": "nextron-systems",
+  "sources": [
+    "_original/nextron-systems-thunderstorm-openapi.yaml",
+    "nextron-systems-thunderstorm-openapi.yml"
+  ],
+  "outputs": [
+    "nextron-systems-info-api-openapi.yml",
+    "nextron-systems-results-api-openapi.yml",
+    "nextron-systems-scan-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/nextron-systems-thunderstorm-openapi.yml"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "nextron-systems-thunderstorm-openapi.yaml: upgraded openapi 3.0.4 -> OpenAPI 3.2.0",
+    "nextron-systems-thunderstorm-openapi.yml: upgraded openapi 3.0.4 -> OpenAPI 3.2.0",
+    "tag 'info' spans 2 source specs (nextron-systems-thunderstorm-openapi.yaml, nextron-systems-thunderstorm-openapi.yml): per-path servers applied",
+    "tag 'results' spans 2 source specs (nextron-systems-thunderstorm-openapi.yaml, nextron-systems-thunderstorm-openapi.yml): per-path servers applied",
+    "tag 'scan' spans 2 source specs (nextron-systems-thunderstorm-openapi.yaml, nextron-systems-thunderstorm-openapi.yml): per-path servers applied",
+    "apis.yml register: written (+3 apis, 5 total)"
+  ],
+  "skipped": []
+}

@@ -1,0 +1,12 @@
+name: Nextron Systems Agent Skills
+generated: '2026-10-09'
+method: generated
+source: openapi/nextron-systems-thunderstorm-openapi.yml
+note: No provider-published skills or AGENTS.md were found; these are generated from the THOR Thunderstorm OpenAPI.
+skills:
+- name: nextron-systems-scan-file
+  path: skills/nextron-systems-scan-file.md
+  api: nextron-systems:thor-thunderstorm-api
+- name: nextron-systems-monitor-instance
+  path: skills/nextron-systems-monitor-instance.md
+  api: nextron-systems:thor-thunderstorm-api

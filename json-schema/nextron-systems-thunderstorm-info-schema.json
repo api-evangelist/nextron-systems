@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/nextron-systems/main/json-schema/nextron-systems-thunderstorm-info-schema.json",
+  "title": "ThunderstormInfo",
+  "description": "Information about the Thunderstorm service instance, including version details, configuration, and license information.",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/ThunderstormInfo",
+  "type": "object",
+  "properties": {
+    "version_info": {
+      "$ref": "#/$defs/ThunderstormVersionInfo"
+    },
+    "arguments": {
+      "description": "Command-line arguments used to start the underlying THOR instance.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "license_expiration": {
+      "description": "Expiration date and time of the license in ISO 8601 format.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "license_owner": {
+      "description": "Name of the license owner.",
+      "type": "string"
+    },
+    "scan_speed_limitation": {
+      "description": "Scan speed limitation in bytes per second. A value of 0 indicates no limitation.",
+      "type": "integer",
+      "format": "int64"
+    },
+    "threads": {
+      "description": "Number of threads used for scanning.",
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  "required": [
+    "version_info",
+    "arguments",
+    "license_expiration",
+    "license_owner",
+    "scan_speed_limitation",
+    "threads"
+  ],
+  "$defs": {
+    "ThunderstormVersionInfo": {
+      "description": "Version information for various components of the Thunderstorm service.",
+      "type": "object",
+      "properties": {
+        "thor": {
+          "description": "Version of the THOR scanner engine.",
+          "type": "string"
+        },
+        "build": {
+          "description": "Build timestamp of the THOR scanner.",
+          "type": "string"
+        },
+        "signatures": {
+          "description": "Version/timestamp of the signature database.",
+          "type": "string"
+        },
+        "sigma": {
+          "description": "Version identifier of the Sigma rules.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

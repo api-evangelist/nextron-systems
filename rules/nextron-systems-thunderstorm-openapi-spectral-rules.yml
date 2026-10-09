@@ -1,0 +1,33 @@
+# harvested from https://github.com/NextronSystems/thunderstorm-openapi/blob/10b0ca0f8b85a02facf67ef5f07131e239ba460d/.spectral.yaml on 2026-10-09 — a Spectral ruleset published in the provider's own GitHub repository (NextronSystems/thunderstorm-openapi); found by GitHub code search, fetched verbatim
+x-method: harvested
+x-stamped: 2026-10-09
+x-source-url: https://github.com/NextronSystems/thunderstorm-openapi/blob/10b0ca0f8b85a02facf67ef5f07131e239ba460d/.spectral.yaml
+extends: ["spectral:oas", "spectral:asyncapi", "spectral:arazzo", "@ibm-cloud/openapi-ruleset"]
+rules:
+  # Documentation: https://cloud.ibm.com/docs/api-handbook?topic=api-handbook-intro
+
+  # Legacy: the first API version named paths in camelCase.
+  ibm-path-segment-casing-convention: info
+  ibm-operationid-casing-convention: info
+  # Legacy: synchronous check returns a list of findings directly.
+  ibm-no-array-responses: info
+  # Legacy: the list of findings in the asynchronous result is optional because it depends on the status.
+  ibm-required-array-properties-in-response: info
+  # Legacy: history data can be empty.
+  ibm-accept-and-return-models: info
+
+  # THOR Finding's properties have various different value types, even on the first level.
+  ibm-well-defined-dictionaries: off
+  # Some version information and status details are mistakenly recognized as date-time format strings.
+  ibm-use-date-based-format: off
+  # Reported errors do not obey IBM's error container model, cf. https://cloud.ibm.com/docs/api-handbook?topic=api-handbook-errors
+  ibm-error-response-schemas: off
+
+  # Unfortunately, the ibm-*-attributes bundle useful rules (like `format` for
+  # integers) with doubtful ones (like `maximum` for integers) which often can
+  # not be met in general. As those are SHOULD rules anyway, degrade them to
+  # info level which will, by default, show up in the report but not fail the
+  # validation.
+  ibm-array-attributes: info
+  ibm-integer-attributes: info
+  ibm-string-attributes: info

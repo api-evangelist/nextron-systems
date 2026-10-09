@@ -1,0 +1,99 @@
+{
+  "@context": {
+    "@vocab": "https://nextron-systems.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "nextron": "https://nextron-systems.com/schema#",
+    "FileObject": "nextron:FileObject",
+    "file": {
+      "@id": "nextron:file",
+      "@type": "xsd:string"
+    },
+    "SampleIdObj": "nextron:SampleIdObj",
+    "id": {
+      "@id": "nextron:id",
+      "@type": "@id"
+    },
+    "AsyncResult": "nextron:AsyncResult",
+    "status": {
+      "@id": "nextron:status",
+      "@type": "xsd:string"
+    },
+    "result": {
+      "@id": "nextron:result",
+      "@type": "@id"
+    },
+    "ThunderstormInfo": "nextron:ThunderstormInfo",
+    "version_info": {
+      "@id": "nextron:version_info",
+      "@type": "@id"
+    },
+    "arguments": {
+      "@id": "nextron:arguments",
+      "@container": "@list"
+    },
+    "license_expiration": {
+      "@id": "nextron:license_expiration",
+      "@type": "xsd:dateTime"
+    },
+    "license_owner": {
+      "@id": "nextron:license_owner",
+      "@type": "xsd:string"
+    },
+    "scan_speed_limitation": {
+      "@id": "nextron:scan_speed_limitation",
+      "@type": "xsd:integer"
+    },
+    "threads": {
+      "@id": "nextron:threads",
+      "@type": "xsd:integer"
+    },
+    "ThunderstormVersionInfo": "nextron:ThunderstormVersionInfo",
+    "thor": {
+      "@id": "nextron:thor",
+      "@type": "xsd:string"
+    },
+    "build": {
+      "@id": "nextron:build",
+      "@type": "xsd:string"
+    },
+    "signatures": {
+      "@id": "nextron:signatures",
+      "@type": "xsd:string"
+    },
+    "sigma": {
+      "@id": "nextron:sigma",
+      "@type": "xsd:string"
+    },
+    "ThunderstormStatus": "nextron:ThunderstormStatus",
+    "scanned_samples": {
+      "@id": "nextron:scanned_samples",
+      "@type": "xsd:integer"
+    },
+    "queued_async_requests": {
+      "@id": "nextron:queued_async_requests",
+      "@type": "xsd:integer"
+    },
+    "avg_scan_time_milliseconds": {
+      "@id": "nextron:avg_scan_time_milliseconds",
+      "@type": "xsd:integer"
+    },
+    "avg_wait_time_milliseconds": {
+      "@id": "nextron:avg_wait_time_milliseconds",
+      "@type": "xsd:integer"
+    },
+    "Error": "nextron:Error",
+    "message": {
+      "@id": "nextron:message",
+      "@type": "xsd:string"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Nextron Systems API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Nextron Systems's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-09) from openapi/nextron-systems-thunderstorm-openapi.yml.",
+  "dcterms:created": "2026-10-09",
+  "dcterms:source": [
+    "openapi/nextron-systems-thunderstorm-openapi.yml"
+  ]
+}

@@ -1,0 +1,14 @@
+generated: '2026-10-09'
+method: none
+source: https://www.nextron-systems.com/get-started/
+name: Nextron Systems Plans
+audience: business-product
+pricing_basis: negotiated
+published: false
+plan_count: 0
+plans: []
+delivery:
+  mode: self-hosted
+  evidence: 'To run THOR in Thunderstorm service mode, you need a special license type named "Service License" that allows this mode of operation.'
+  evidence_url: https://thor-manual.nextron-systems.com/en/latest/usage/deployment.html
+note: No public price list found; the site's llms.txt index and get-started page carry no prices. Thunderstorm requires a "Service License"; the get-started page points to "our free Lite products" (THOR Lite) separately.

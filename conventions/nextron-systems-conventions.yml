@@ -1,0 +1,36 @@
+generated: '2026-10-09'
+method: searched
+source: https://thor-manual.nextron-systems.com/en/latest/usage/deployment.html
+description: Cross-cutting conventions of the self-hosted THOR Thunderstorm API, from its OpenAPI 3.0.4 contract and the THOR manual's Thunderstorm Service section.
+base_url: http://localhost:8080/api/v1 (customer-hosted; manual examples use http://myserver:8080/api/check)
+api_style: REST, multipart/form-data sample upload, JSON responses
+authentication:
+  style: none declared for Thunderstorm (see authentication/nextron-systems-authentication.yml)
+idempotency:
+  coverage: none
+  description: No idempotency key or replay protection is documented. Writes are sample submissions (check, checkAsync); checkAsync returns a send receipt id usable with getAsyncResults.
+pagination:
+  style: none
+  description: No paginated list operations; queueHistory and sampleHistory return timestamp-keyed maps.
+field_expansion: none documented
+metadata:
+  description: Optional source query parameter overrides the hostname recorded in the THOR log ("every source can set a source value in the request").
+request_tracing: none documented
+versioning:
+  style: URL path (/api/v1); info.version 1.0.0
+  see: lifecycle/nextron-systems-lifecycle.yml
+error_envelope:
+  format: application/json
+  shape: '{"message": string}'
+  schema: components.schemas.Error
+  statuses: [400, 500]
+rate_limits:
+  description: No request rate limits documented; throughput is governed by service threads (--threads, --sync-only-threads) and an on-disk async queue whose length is exposed at /api/status.
+  see: rate-limits/nextron-systems-rate-limits.yml
+webhooks: none
+reversibility:
+  coverage: na
+  description: Submissions trigger a scan and return results; no persistent resources are created that a client can modify, so there is no reversal operation and none is needed. No cancel operation for queued async samples is documented.
+other_conventions:
+- Synchronous (/api/check, returns scan result) vs asynchronous (/api/checkAsync, returns a receipt id) submission modes.
+- TLS optional; the manual states "We do not recommend the use of SSL/TLS since it impacts the submission performance" and the thunderstormAPI client does not verify server certificates by default.

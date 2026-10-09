@@ -1,0 +1,27 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/nextron-systems-thunderstorm-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: Error
+coverage:
+  operations: 7
+  statuses_declared: 2
+problems:
+- status: 400
+  title: Bad Request
+  description: Invalid parameters given
+  operations: 5
+  media_types:
+  - application/json
+  schema: Error
+- status: 500
+  title: Internal Server Error
+  description: Unauthorized
+  operations: 4
+  media_types:
+  - application/json
+  schema: Error

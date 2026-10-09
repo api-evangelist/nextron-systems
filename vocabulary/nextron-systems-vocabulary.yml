@@ -1,0 +1,80 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/nextron-systems-thunderstorm-openapi.yml
+vocabulary:
+  name: Nextron Systems Domain Vocabulary
+  description: 'Terms declared by Nextron Systems''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-09'
+  terms:
+  - term: scan
+    definition: Endpoints to scan files with THOR
+    tags:
+    - Resource Group
+    source: openapi/nextron-systems-thunderstorm-openapi.yml
+  - term: results
+    definition: Endpoints to retrieve results of asynchronous scans
+    tags:
+    - Resource Group
+    source: openapi/nextron-systems-thunderstorm-openapi.yml
+  - term: info
+    definition: Endpoints to retrieve information about the running THOR instance
+    tags:
+    - Resource Group
+    source: openapi/nextron-systems-thunderstorm-openapi.yml
+  - term: FileObject
+    definition: Wrapped file
+    tags:
+    - Object
+    source: openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/FileObject
+  - term: ThorReport
+    definition: THOR Report containing findings
+    tags:
+    - Object
+    source: openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/ThorReport
+  - term: ThorFinding
+    definition: THOR Finding
+    tags:
+    - Object
+    source: openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/ThorFinding
+  - term: SampleIdObj
+    definition: Object containing the Sample ID returned for an asynchronous scan request
+    tags:
+    - Object
+    source: openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/SampleIdObj
+  - term: SampleId
+    definition: Sample ID returned for an asynchronous scan request
+    tags:
+    - Object
+    source: openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/SampleId
+  - term: AsyncResult
+    definition: Result object for asynchronous scan operations
+    tags:
+    - Object
+    source: openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/AsyncResult
+  - term: TimestampMap
+    definition: Map of timestamps to integer values
+    tags:
+    - Object
+    source: openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/TimestampMap
+  - term: ThunderstormInfo
+    definition: Information about the Thunderstorm service instance, including version details, configuration, and license information.
+    tags:
+    - Object
+    source: openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/ThunderstormInfo
+  - term: ThunderstormVersionInfo
+    definition: Version information for various components of the Thunderstorm service.
+    tags:
+    - Object
+    source: openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/ThunderstormVersionInfo
+  - term: ThunderstormStatus
+    definition: Live information about the running THOR instance
+    tags:
+    - Object
+    source: openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/ThunderstormStatus
+  - term: Error
+    definition: Error with message
+    tags:
+    - Object
+    source: openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/Error

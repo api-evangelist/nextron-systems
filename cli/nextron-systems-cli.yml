@@ -1,0 +1,45 @@
+generated: '2026-10-09'
+method: searched
+source: https://raw.githubusercontent.com/NextronSystems/thunderstormAPI/master/README.md
+description: thunderstorm-cli, the example Python command line API client shipped in the first-party thunderstormAPI package, submits samples to and queries a self-hosted THOR Thunderstorm service.
+docs: https://thor-manual.nextron-systems.com/en/latest/usage/deployment.html
+repo: https://github.com/NextronSystems/thunderstormAPI
+install:
+- method: pip
+  command: pip install thunderstormAPI
+commands:
+  connection:
+  - '-t host, --thor_host host'
+  - '-p port, --thor_port port'
+  - '--ssl'
+  - '--strict_ssl strict-ssl'
+  - '-o source, --source source'
+  - '-ps proxy-url, --proxy proxy-url'
+  - '-pu proxy-user, --proxy_user proxy-user'
+  - '-pp proxy-pass, --proxy_pass proxy-pass'
+  info:
+  - '--status (Get status information from the service (processed samples, errors, runtime))'
+  - '--info (Get general information (versions, license info))'
+  - '--result with -r sample-id (Get information on a certain sample id)'
+  scan:
+  - '-s, --scan (Transmit sample file to get it scanned)'
+  - '-f sample, --file sample'
+  - '-d sample-dir, --dir sample-dir'
+  - '-e EXCLUDE, --exclude'
+  - '-i INCLUDE, --include'
+  - '-l lookback, --lookback lookback'
+  - '-n threads, --threads threads'
+  - '-m minimum-level, --min_level minimum-level'
+  - '--asyn (Asynchronous transmission (server just returns a send receipt and not a result))'
+  debugging:
+  - '--debug'
+  - '--trace'
+key_flows:
+- name: Service info
+  command: ./thunderstorm-cli --info -t 10.0.0.14
+- name: Scan a file
+  command: ./thunderstorm-cli --scan -t 10.0.0.14 -f ./samples/webshell.txt
+- name: Scan a directory asynchronously
+  command: ./thunderstorm-cli --scan -t 10.0.0.14 -d ./samples/ --asyn
+- name: Tag the source
+  command: ./thunderstorm-cli --scan -t 10.0.0.14 -d ./samples/ --source sample_collector_1

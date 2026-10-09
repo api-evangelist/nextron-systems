@@ -1,0 +1,521 @@
+# x-archived-from: nextron-systems-thunderstorm-openapi.yml
+# x-archived-on: 2026-10-09
+openapi: 3.0.4
+info:
+  title: THOR Thunderstorm API
+  description: >-
+    This API allows you to send files to THOR to scan them and provides
+    information about the running THOR instance.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local THOR instance
+tags:
+  - name: scan
+    description: Endpoints to scan files with THOR
+  - name: results
+    description: Endpoints to retrieve results of asynchronous scans
+  - name: info
+    description: Endpoints to retrieve information about the running THOR instance
+paths:
+  /check:
+    post:
+      summary: Check a file with THOR
+      description: Check a file with THOR
+      tags:
+        - scan
+      operationId: check
+      parameters:
+        - $ref: "#/components/parameters/SampleSource"
+      requestBody:
+        $ref: "#/components/requestBodies/FileUpload"
+      responses:
+        "200":
+          description: Returns a list of findings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThorReport"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /checkAsync:
+    post:
+      summary: Check a file with THOR asynchronously
+      description: Check a file with THOR asynchronously
+      tags:
+        - scan
+      operationId: checkAsync
+      parameters:
+        - $ref: "#/components/parameters/SampleSource"
+      requestBody:
+        $ref: "#/components/requestBodies/FileUpload"
+      responses:
+        "200":
+          description: Returns a map containing the sample ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SampleIdObj"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /getAsyncResults:
+    get:
+      summary: Retrieve the results of an asynchronous file check
+      description: Retrieve the results of an asynchronous file check.
+      tags:
+        - results
+      operationId: getAsyncResults
+      parameters:
+        - description: Sample ID
+          name: id
+          in: query
+          required: true
+          schema:
+            $ref: "#/components/schemas/SampleId"
+      responses:
+        "200":
+          description: >-
+            Returns a JSON with the current status and, if applicable, the
+            results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AsyncResult"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /queueHistory:
+    get:
+      summary: Retrieve a history of how many asynchronous requests were queued
+      description: Retrieve a history of how many asynchronous requests were queued
+      tags:
+        - info
+      operationId: queueHistory
+      parameters:
+        - $ref: "#/components/parameters/AggregationPeriod"
+        - $ref: "#/components/parameters/HistoryLimit"
+      responses:
+        "200":
+          $ref: "#/components/responses/QueueHistory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+  /sampleHistory:
+    get:
+      summary: Retrieve a history of how many samples were scanned
+      description: Retrieve a history of how many samples were scanned.
+      tags:
+        - info
+      operationId: sampleHistory
+      parameters:
+        - $ref: "#/components/parameters/AggregationPeriod"
+        - $ref: "#/components/parameters/HistoryLimit"
+      responses:
+        "200":
+          $ref: "#/components/responses/SampleHistory"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+  /info:
+    get:
+      summary: Receive static information about the running THOR instance
+      description: Receive static information about the running THOR instance.
+      tags:
+        - info
+      operationId: info
+      responses:
+        "200":
+          description: Map with values to running version, rate limitation, ...
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThunderstormInfo"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+  /status:
+    get:
+      summary: Receive live information about the running THOR instance
+      description: Receive live information about the running THOR instance.
+      tags:
+        - info
+      operationId: status
+      responses:
+        "200":
+          description: Map with values to scan times, scanned samples, wait times, ...
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ThunderstormStatus"
+components:
+  schemas:
+    FileObject:
+      description: Wrapped file
+      type: object
+      properties:
+        file:
+          description: File to be checked
+          type: string
+          format: binary
+      required:
+        - file
+    ThorReport:
+      description: THOR Report containing findings
+      type: array
+      items:
+        $ref: "#/components/schemas/ThorFinding"
+      example:
+        - type: THOR finding
+          meta:
+            time: '2026-01-16T13:35:34.11133172+01:00'
+            level: Alert
+            module: HTTPServer
+            scan_id: S-qkQv5yHIUHk-2
+            hostname: 127.0.0.1
+          message: Malicious file found
+          subject:
+            type: file
+            path: somefile.exe
+            exists: 'yes'
+            extension: .exe
+            magic_header: EXE
+            hashes:
+              md5: 7168892693d7716220d98883fffd848c
+              sha1: 42acd9b554e1c843a9f8139022b560de0bf48682
+              sha256: 660464c473c47784d8820d3e268c0d1327ac22ce0e607dc35e858628c53f0687
+            first_bytes:
+              hex: 4d5a90000300000004000000ffff0000b8000000
+              ascii: MZ
+            size: 1352192
+            permissions: null
+            content:
+              type: sparse data
+              elements:
+                - offset: 856110
+                  data: '>`ncrypt.dll'
+              length: 1352192
+          score: 94
+          reasons:
+            - type: reason
+              summary: some YARA rule
+              signature:
+                score: 85
+                reference:
+                  - Internal Research
+                origin: internal
+                kind: YARA Rule
+                date: '2023-05-12'
+                tags:
+                  - EXE
+                  - HKTL
+                rule_name: Some_Rule_Name
+                description: Detects Something
+              matched:
+                - data: '%*s**CREDENTIAL**'
+                  offset: 918480
+                  field: /content
+                - data: '%*s  Persist        : %08x - %u - %s'
+                  offset: 919056
+                  field: /content
+                - data: '%*s**DOMAINKEY**'
+                  offset: 950688
+                  field: /content
+            - type: reason
+              summary: Another rule
+              signature:
+                score: 80
+                reference:
+                  - Some reference
+                origin: internal
+                kind: YARA Rule
+                date: '2016-02-05'
+                tags:
+                  - T1059_001
+                rule_name: Another_Rule_Name
+                description: Detects Something other
+              matched:
+                - data: kuhl_m_lsadump_getUsersAndSamKey ; kull_m_registry_RegOpenKeyEx SAM
+                    Accounts (0x%08x)
+                  offset: 1100540
+                  field: /content
+                - data: kuhl_m_lsadump_getComputerAndSyskey ; kuhl_m_lsadump_getSyskey KO
+                  offset: 1099708
+                  field: /content
+          reason_count: 28
+          context: null
+          log_version: v3.0.0
+    ThorFinding:
+      description: THOR Finding
+      type: object
+      additionalProperties: true # Any type
+    SampleIdObj:
+      description: Object containing the Sample ID returned for an asynchronous scan request
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/SampleId"
+      required:
+        - id
+      example:
+        id: 12345
+    SampleId:
+      description: Sample ID returned for an asynchronous scan request
+      type: integer
+      format: int64
+      example:
+        12345
+    AsyncResult:
+      description: Result object for asynchronous scan operations
+      type: object
+      properties:
+        status:
+          description: Current status of the scan
+          type: string
+          # TODO: Use enum? (would require snake-cased keywords)
+          # values: ["Waiting for execution", "Currently being scanned", "Sample analysis complete", "Sample analysis failed", "invalid"]
+          example:
+            Currently being scanned
+        result:
+          $ref: "#/components/schemas/ThorReport"
+      required:
+        - status
+      example:
+        result:
+          - type: THOR finding
+            meta:
+              time: '2026-01-19T16:08:27.809483955+01:00'
+              level: Warning
+              module: HTTPServer
+              scan_id: S-qiVIo7fm2Yk-4
+              hostname: 127.0.0.1
+            message: Suspicious file found
+            subject:
+              type: file
+              path: 6700758b14fe8ac1bbcbbf3d652613d8
+              exists: 'yes'
+              extension: ''
+              magic_header: UNKNOWN
+              hashes:
+                md5: ffc74d5afc22d1f1c785f98154cc7bae
+                sha1: 9603a4806528578686dc5f02b805c64414b3c91b
+                sha256: da1d2378fbacf84d09d18a94def83cd3bfc06e89e7429ba3de57cd96a0e04a87
+              first_bytes:
+                hex: 2f2a0ae8aeade8aeb0200a5b726577726974655f
+                ascii: /* [rewrite_
+              size: 5369
+              permissions: null
+              content:
+                type: sparse data
+                elements:
+                  - offset: 273
+                    data: var _0x
+                length: 5369
+            score: 79
+            reasons:
+              - type: reason
+                summary: YARA rule OBFUSC
+                signature:
+                  score: 65
+                  origin: internal
+                  kind: YARA Rule
+                  date: '2025-03-29'
+                  tags:
+                    - OBFUS
+                  rule_name: OBFUSC
+                  description: Detects obfuscated JavaScript code
+                matched:
+                  - data: ''']=!![];}'
+                    offset: 3865
+                    field: /content
+            reason_count: 1
+            context: null
+            log_version: v3.0.0
+        status: Sample analysis complete
+    TimestampMap:
+      description: Map of timestamps to integer values
+      type: object
+      additionalProperties:
+        type: integer
+        format: int64
+      example:
+        2026-01-21 06:45: 0
+        2026-01-21 07:00: 9165
+        2026-01-21 07:15: 49023
+        2026-01-21 07:30: 61685
+        2026-01-21 07:45: 54932
+    ThunderstormInfo:
+      description: Information about the Thunderstorm service instance, including version details, configuration, and license information.
+      type: object
+      properties:
+        version_info:
+          $ref: "#/components/schemas/ThunderstormVersionInfo"
+        arguments:
+          description: Command-line arguments used to start the underlying THOR instance.
+          type: array
+          items:
+            type: string
+          example: ["--config", "/opt/nextron/thunderstorm/config/custom-thor.yml"]
+        license_expiration:
+          description: Expiration date and time of the license in ISO 8601 format.
+          type: string
+          format: date-time
+          example: "2026-07-08T00:00:00Z"
+        license_owner:
+          description: Name of the license owner.
+          type: string
+          example: "admin"
+        scan_speed_limitation:
+          description: Scan speed limitation in bytes per second. A value of 0 indicates no limitation.
+          type: integer
+          format: int64
+          example: 0
+        threads:
+          description: Number of threads used for scanning.
+          type: integer
+          format: int64
+          example: 16
+      required:
+        - version_info
+        - arguments
+        - license_expiration
+        - license_owner
+        - scan_speed_limitation
+        - threads
+      example:
+        version_info:
+          thor: "10.8.0"
+          build: "2026-01-07 04:02:31"
+          signatures: "2026/01/12-160550"
+          sigma: "r2025-12-01-18-g6d581764e"
+        arguments:
+          - "--config"
+          - "/opt/nextron/thunderstorm/config/custom-thor.yml"
+        license_expiration: "2026-07-08T00:00:00Z"
+        license_owner: "admin"
+        scan_speed_limitation: 0
+        threads: 16
+    ThunderstormVersionInfo:
+      description: Version information for various components of the Thunderstorm service.
+      type: object
+      properties:
+        thor:
+          description: Version of the THOR scanner engine.
+          type: string
+          example: "10.8.0"
+        build:
+          description: Build timestamp of the THOR scanner.
+          type: string
+          example: "2026-01-07 04:02:31"
+        signatures:
+          description: Version/timestamp of the signature database.
+          type: string
+          example: "2026/01/12-160550"
+        sigma:
+          description: Version identifier of the Sigma rules.
+          type: string
+          example: "r2025-12-01-18-g6d581764e"
+    ThunderstormStatus:
+      description: Live information about the running THOR instance
+      type: object
+      properties:
+        scanned_samples:
+          description: Total number of samples that have been scanned
+          type: integer
+          format: int64
+          example: 18686305
+        queued_async_requests:
+          description: Number of asynchronous requests currently in queue
+          type: integer
+          format: int64
+          example: 0
+        avg_scan_time_milliseconds:
+          description: Average time in milliseconds to scan a sample
+          type: integer
+          format: int64
+          example: 21
+        avg_wait_time_milliseconds:
+          description: Average wait time in milliseconds before processing
+          type: integer
+          format: int64
+          example: 0
+      required:
+        - scanned_samples
+        - queued_async_requests
+        - avg_scan_time_milliseconds
+        - avg_wait_time_milliseconds
+      example:
+        scanned_samples: 18686305
+        queued_async_requests: 0
+        avg_scan_time_milliseconds: 21
+        avg_wait_time_milliseconds: 0
+    Error:
+      description: Error with message
+      type: object
+      properties:
+        message:
+          description: Error message describing the problem
+          type: string
+      required:
+        - message
+  parameters:
+    SampleSource:
+      description: Specify source for the THOR log
+      name: source
+      in: query
+      schema:
+        type: string
+    AggregationPeriod:
+      description: Aggregate this many minutes per value (default 1).
+      name: aggregate
+      in: query
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+    HistoryLimit:
+      description: Give a history for the last this many minutes (default infinite).
+      name: limit
+      in: query
+      schema:
+        type: integer
+        format: int64
+        minimum: 0
+  requestBodies:
+    FileUpload:
+      required: true
+      description: Multipart form data containing a file
+      content:
+        multipart/form-data:
+          schema:
+            $ref: "#/components/schemas/FileObject"
+  responses:
+    QueueHistory:
+      description: >-
+        A JSON Map with each time mapped to the queue length
+        (estimated) from the last time mentioned to that time.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TimestampMap"
+    SampleHistory:
+      description: >-
+        Returns a JSON Map with each time mapped to the samples scanned from
+        the last time mentioned to that time
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TimestampMap"
+    BadRequest:
+      description: Invalid parameters given
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    InternalServerError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"

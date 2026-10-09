@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/nextron-systems/main/json-schema/nextron-systems-thunderstorm-status-schema.json",
+  "title": "ThunderstormStatus",
+  "description": "Live information about the running THOR instance",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/nextron-systems-thunderstorm-openapi.yml#/components/schemas/ThunderstormStatus",
+  "type": "object",
+  "properties": {
+    "scanned_samples": {
+      "description": "Total number of samples that have been scanned",
+      "type": "integer",
+      "format": "int64"
+    },
+    "queued_async_requests": {
+      "description": "Number of asynchronous requests currently in queue",
+      "type": "integer",
+      "format": "int64"
+    },
+    "avg_scan_time_milliseconds": {
+      "description": "Average time in milliseconds to scan a sample",
+      "type": "integer",
+      "format": "int64"
+    },
+    "avg_wait_time_milliseconds": {
+      "description": "Average wait time in milliseconds before processing",
+      "type": "integer",
+      "format": "int64"
+    }
+  },
+  "required": [
+    "scanned_samples",
+    "queued_async_requests",
+    "avg_scan_time_milliseconds",
+    "avg_wait_time_milliseconds"
+  ]
+}

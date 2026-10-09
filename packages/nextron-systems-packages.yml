@@ -1,0 +1,18 @@
+generated: '2026-10-09'
+method: searched
+source: https://pypi.org/pypi/thunderstormAPI/json
+name: Nextron Systems Packages
+description: First-party client packages for Nextron Systems APIs. The THOR manual (https://thor-manual.nextron-systems.com/en/latest/usage/deployment.html) states "We provide a free and open source command line client written in Python to communicate with the Thunderstorm service" installed with "pip install thunderstormAPI". npm (thunderstorm-api) answered 404. No SDK is published for the Analysis Cockpit or ASGARD Management Center APIs.
+packages:
+- name: thunderstormAPI
+  registry: pypi
+  url: https://pypi.org/project/thunderstormAPI/
+  language: Python
+  official: true
+  version: 0.2.0
+  published: '2025-11-20'
+  summary: THOR Thunderstorm Service API Client
+  repo: https://github.com/NextronSystems/thunderstormAPI
+  api: nextron-systems:thor-thunderstorm-api
+  includes_cli: thunderstorm-cli
+  note: Earlier releases 0.1.0 (2020-09-11) and 0.1.1 (2020-09-18), per PyPI metadata.

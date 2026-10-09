@@ -1,0 +1,41 @@
+name: Nextron Systems THOR Thunderstorm MCP (candidate)
+type: MCPServer
+generated: '2026-10-09'
+method: derived
+source: openapi/nextron-systems-thunderstorm-openapi.yml
+status: candidate
+description: >-
+  No official MCP server from Nextron Systems was found (web search 2026-10-09 for
+  "Nextron Systems MCP server THOR Thunderstorm"; the provider's llms.txt at
+  https://www.nextron-systems.com/llms.txt (HTTP 200) does not mention MCP; no MCP
+  repository surfaced under github.com/NextronSystems). This is a candidate tool list
+  derived from the 7 operations of the published THOR Thunderstorm OpenAPI 1.0.0.
+  Thunderstorm is self-hosted (server http://localhost:8080/api/v1), so any server
+  built from this would run against the customer's own instance.
+deployment:
+  mode: none
+  auth: none
+  verified: derived
+  note: The OpenAPI declares no securitySchemes; nobody ships an MCP server for this API.
+tools:
+- name: check
+  operationId: check
+  description: Check a file with THOR (synchronous multipart upload, returns THOR report).
+- name: checkAsync
+  operationId: checkAsync
+  description: Check a file with THOR asynchronously; returns a sample id.
+- name: getAsyncResults
+  operationId: getAsyncResults
+  description: Retrieve the results of an asynchronous file check by sample id.
+- name: queueHistory
+  operationId: queueHistory
+  description: History of how many asynchronous requests were queued.
+- name: sampleHistory
+  operationId: sampleHistory
+  description: History of how many samples were scanned.
+- name: info
+  operationId: info
+  description: Static information about the running THOR instance.
+- name: status
+  operationId: status
+  description: Live information about the running THOR instance.

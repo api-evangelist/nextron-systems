@@ -1,0 +1,12 @@
+generated: '2026-10-09'
+method: derived
+source: openapi/nextron-systems-thunderstorm-openapi.yml
+versioning:
+  scheme: URL path major version (/api/v1); OpenAPI info.version 1.0.0
+  note: No public API versioning or deprecation policy is published. Service updates follow THOR ("thor-util update" / "thor-util upgrade", or the thunderstorm-update script) per https://thor-manual.nextron-systems.com/en/latest/usage/deployment.html.
+deprecation:
+  policy: none published
+  deprecated_operations: []
+  sunset_headers: none documented
+status_page: null
+sla: none published (self-hosted service)

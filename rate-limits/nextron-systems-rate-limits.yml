@@ -1,0 +1,7 @@
+generated: '2026-10-09'
+method: none
+source: https://thor-manual.nextron-systems.com/en/latest/usage/deployment.html
+name: Nextron Systems Rate Limits
+limit_count: 0
+limits: []
+note: No request rate limits or rate-limit headers are documented for the self-hosted Thunderstorm API; capacity is set by the operator via --threads and --sync-only-threads, with async samples queued on disk (queue length at /api/status).

@@ -1,0 +1,64 @@
+generated: '2026-10-09'
+method: searched
+probe: true
+source:
+- https://www.nextron-systems.com/privacy/
+- https://www.nextron-systems.com/imprint/
+note: >-
+  Harvested from Nextron Systems GmbH's own Privacy Policy (status "July 2025"), which covers the
+  website, newsletter, contact forms, applications and tracking tools. The provider does not publish
+  anything about its products (THOR, ASGARD, VALHALLA, THOR Cloud) on these pages. These conventional
+  paths returned 404 on 2026-10-09: /accessibility/, /legal/subprocessors/, /subprocessors/, /legal/dpa/,
+  /dpa/, /trust/, /transparency/, /security/sbom/, /ai/, /legal/, /terms/. /.well-known/security.txt
+  returned 403. No signal is recorded for subprocessors, sbom, accessibility, AI, incident notification
+  or the others, because none was published.
+signals:
+  data_subject_request:
+    url: https://www.nextron-systems.com/privacy/
+    section: 13. Your rights
+    note: >-
+      Lists GDPR data subject rights (access, correction, deletion, restriction, objection, portability).
+      Requests go in writing or by email to the external DPO (krupna LEGAL, data.protection@nextron-systems.com).
+      No self-service or API channel is documented.
+    evidence:
+    - source: https://www.nextron-systems.com/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: transmission of your personal data – if you have provided it – to you or a third party in a structured, common and machine-readable format.
+    - source: https://www.nextron-systems.com/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: Please address your specific request in writing or by e-mail to our data protection officer (see section 1), clearly identifying yourself.
+  data_retention:
+    url: https://www.nextron-systems.com/privacy/
+    section: 12. Duration for which personal data is stored /criteria for determining the duration
+    note: >-
+      Retention is purpose-bound. Contact data is kept for 3 years and its metadata for at most 7 days.
+      Data from unsuccessful applications is kept for at most 6 months. This applies to website and
+      contact data, not to product telemetry.
+    evidence:
+    - source: https://www.nextron-systems.com/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: We generally store the personal data you provide for 3 years, unless we are obliged to store it for longer. The additional metadata collected with the transmission will be deleted after a period of 7 days at the latest.
+    - source: https://www.nextron-systems.com/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: If your application is not successful, we will store your data beyond the period of the application process for a maximum of 6 months, unless you have given your consent to further data processing.
+  data_residency:
+    url: https://www.nextron-systems.com/privacy/
+    section: 11. Data transfer
+    regions: [eu]
+    note: >-
+      This is a preference to process data in the EU/EEA, not a guarantee. The policy also says data
+      goes to US recipients under SCCs and/or the EU-U.S. Data Privacy Framework. It covers website
+      processing only, and no product data-residency options are published.
+    evidence:
+    - source: https://www.nextron-systems.com/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: We attach importance to processing your data within the EU / EEA.
+    - source: https://www.nextron-systems.com/privacy/
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: As part of data processing, your data will also be transferred to recipients based in the USA, for example.
