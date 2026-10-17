@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Nextron Systems Scan API
+  title: THOR Thunderstorm Scan API
+  description: This API allows you to send files to THOR to scan them and provides information about the running THOR instance.
   version: 1.0.0
-  description: 'Operations tagged scan across 2 of this provider''s published API definitions: nextron-systems-thunderstorm-openapi.yaml, nextron-systems-thunderstorm-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: http://localhost:8080/api/v1
   description: Local THOR instance
@@ -31,9 +31,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
-    servers:
-    - url: http://localhost:8080/api/v1
-      description: Local THOR instance
   /checkAsync:
     post:
       summary: Check a file with THOR asynchronously
@@ -55,11 +52,17 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
-    servers:
-    - url: http://localhost:8080/api/v1
-      description: Local THOR instance
 components:
   schemas:
+    Error:
+      description: Error with message
+      type: object
+      properties:
+        message:
+          description: Error message describing the problem
+          type: string
+      required:
+      - message
     SampleId:
       description: Sample ID returned for an asynchronous scan request
       type: integer
@@ -149,15 +152,6 @@ components:
         reason_count: 28
         context: null
         log_version: v3.0.0
-    Error:
-      description: Error with message
-      type: object
-      properties:
-        message:
-          description: Error message describing the problem
-          type: string
-      required:
-      - message
     SampleIdObj:
       description: Object containing the Sample ID returned for an asynchronous scan request
       type: object
@@ -191,14 +185,14 @@ components:
           schema:
             $ref: '#/components/schemas/FileObject'
   responses:
-    InternalServerError:
-      description: Unauthorized
+    BadRequest:
+      description: Invalid parameters given
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid parameters given
+    InternalServerError:
+      description: Unauthorized
       content:
         application/json:
           schema:
@@ -210,6 +204,3 @@ components:
       in: query
       schema:
         type: string
-x-refined-from:
-- nextron-systems-thunderstorm-openapi.yaml
-- nextron-systems-thunderstorm-openapi.yml

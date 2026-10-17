@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Nextron Systems Info API
+  title: THOR Thunderstorm Info API
+  description: This API allows you to send files to THOR to scan them and provides information about the running THOR instance.
   version: 1.0.0
-  description: 'Operations tagged info across 2 of this provider''s published API definitions: nextron-systems-thunderstorm-openapi.yaml, nextron-systems-thunderstorm-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: http://localhost:8080/api/v1
   description: Local THOR instance
@@ -24,9 +24,6 @@ paths:
           $ref: '#/components/responses/QueueHistory'
         '400':
           $ref: '#/components/responses/BadRequest'
-    servers:
-    - url: http://localhost:8080/api/v1
-      description: Local THOR instance
   /sampleHistory:
     get:
       summary: Retrieve a history of how many samples were scanned
@@ -42,9 +39,6 @@ paths:
           $ref: '#/components/responses/SampleHistory'
         '400':
           $ref: '#/components/responses/BadRequest'
-    servers:
-    - url: http://localhost:8080/api/v1
-      description: Local THOR instance
   /info:
     get:
       summary: Receive static information about the running THOR instance
@@ -61,9 +55,6 @@ paths:
                 $ref: '#/components/schemas/ThunderstormInfo'
         '500':
           $ref: '#/components/responses/InternalServerError'
-    servers:
-    - url: http://localhost:8080/api/v1
-      description: Local THOR instance
   /status:
     get:
       summary: Receive live information about the running THOR instance
@@ -78,45 +69,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThunderstormStatus'
-    servers:
-    - url: http://localhost:8080/api/v1
-      description: Local THOR instance
 components:
   schemas:
-    ThunderstormStatus:
-      description: Live information about the running THOR instance
+    Error:
+      description: Error with message
       type: object
       properties:
-        scanned_samples:
-          description: Total number of samples that have been scanned
-          type: integer
-          format: int64
-          example: 18686305
-        queued_async_requests:
-          description: Number of asynchronous requests currently in queue
-          type: integer
-          format: int64
-          example: 0
-        avg_scan_time_milliseconds:
-          description: Average time in milliseconds to scan a sample
-          type: integer
-          format: int64
-          example: 21
-        avg_wait_time_milliseconds:
-          description: Average wait time in milliseconds before processing
-          type: integer
-          format: int64
-          example: 0
+        message:
+          description: Error message describing the problem
+          type: string
       required:
-      - scanned_samples
-      - queued_async_requests
-      - avg_scan_time_milliseconds
-      - avg_wait_time_milliseconds
-      example:
-        scanned_samples: 18686305
-        queued_async_requests: 0
-        avg_scan_time_milliseconds: 21
-        avg_wait_time_milliseconds: 0
+      - message
     ThunderstormInfo:
       description: Information about the Thunderstorm service instance, including version details, configuration, and license information.
       type: object
@@ -170,15 +133,6 @@ components:
         license_owner: admin
         scan_speed_limitation: 0
         threads: 16
-    Error:
-      description: Error with message
-      type: object
-      properties:
-        message:
-          description: Error message describing the problem
-          type: string
-      required:
-      - message
     TimestampMap:
       description: Map of timestamps to integer values
       type: object
@@ -191,6 +145,40 @@ components:
         2026-01-21 07:15: 49023
         2026-01-21 07:30: 61685
         2026-01-21 07:45: 54932
+    ThunderstormStatus:
+      description: Live information about the running THOR instance
+      type: object
+      properties:
+        scanned_samples:
+          description: Total number of samples that have been scanned
+          type: integer
+          format: int64
+          example: 18686305
+        queued_async_requests:
+          description: Number of asynchronous requests currently in queue
+          type: integer
+          format: int64
+          example: 0
+        avg_scan_time_milliseconds:
+          description: Average time in milliseconds to scan a sample
+          type: integer
+          format: int64
+          example: 21
+        avg_wait_time_milliseconds:
+          description: Average wait time in milliseconds before processing
+          type: integer
+          format: int64
+          example: 0
+      required:
+      - scanned_samples
+      - queued_async_requests
+      - avg_scan_time_milliseconds
+      - avg_wait_time_milliseconds
+      example:
+        scanned_samples: 18686305
+        queued_async_requests: 0
+        avg_scan_time_milliseconds: 21
+        avg_wait_time_milliseconds: 0
     ThunderstormVersionInfo:
       description: Version information for various components of the Thunderstorm service.
       type: object
@@ -212,26 +200,26 @@ components:
           type: string
           example: r2025-12-01-18-g6d581764e
   responses:
-    SampleHistory:
-      description: Returns a JSON Map with each time mapped to the samples scanned from the last time mentioned to that time
+    QueueHistory:
+      description: A JSON Map with each time mapped to the queue length (estimated) from the last time mentioned to that time.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/TimestampMap'
-    InternalServerError:
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     BadRequest:
       description: Invalid parameters given
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    QueueHistory:
-      description: A JSON Map with each time mapped to the queue length (estimated) from the last time mentioned to that time.
+    InternalServerError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    SampleHistory:
+      description: Returns a JSON Map with each time mapped to the samples scanned from the last time mentioned to that time
       content:
         application/json:
           schema:
@@ -253,6 +241,3 @@ components:
         type: integer
         format: int64
         minimum: 0
-x-refined-from:
-- nextron-systems-thunderstorm-openapi.yaml
-- nextron-systems-thunderstorm-openapi.yml
