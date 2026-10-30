@@ -64,5 +64,147 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Nextron Systems is a company surfaced via the API Evangelist harvest backlog (source: spectral-ruleset-github) and added to the network as a stub for full-pipeline profiling.
-- https://www.nextron-systems.com/
+Nextron Systems (Nextron Systems GmbH) builds automated forensic analysis and compromise assessment tooling under the tagline "We Detect Hackers". Its products include the THOR scanner, THOR Lite, THOR Cloud, THOR Thunderstorm (a web service that scans uploaded samples, with an OpenAPI description published on GitHub), ASGARD Management Center, Analysis Cockpit and the Aurora agent, used to uncover traces of hacking activity, configuration backdoors and obfuscated malware across diverse systems including legacy and edge devices.
+
+**Areas:** Company · Cybersecurity · Forensics · Compromise Assessment · Threat Detection · Malware Analysis · Incident Response
+
+## Nextron Systems on APIs.io
+
+Everything profiled for Nextron Systems is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/nextron-systems/](https://apis.io/providers/nextron-systems/)** — or go straight to one of the APIs or properties below.
+
+### APIs (5)
+
+- [Analysis Cockpit API](https://apis.io/apis/nextron-systems/analysis-cockpit-api/) — The Analysis Cockpit (v4) API; per the manual, "The API documentation has been integrated into the web interface. You can find it in the top right corner's…
+- [ASGARD Management Center API](https://apis.io/apis/nextron-systems/asgard-management-center-api/) — The (Master) Management Center API; per the ASGARD manual it "is documented in the API Documentation section and resembles the API in Management Centers",…
+- [Nextron Systems Info API](https://apis.io/apis/nextron-systems/nextron-systems-info-api/) — Endpoints to retrieve information about the running THOR instance
+- [Nextron Systems Results API](https://apis.io/apis/nextron-systems/nextron-systems-results-api/) — Endpoints to retrieve results of asynchronous scans
+- [Nextron Systems Scan API](https://apis.io/apis/nextron-systems/nextron-systems-scan-api/) — Endpoints to scan files with THOR
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Nextron Systems THOR Thunderstorm MCP (candidate)](https://apis.io/servers/nextron-systems/nextron-systems-thor-thunderstorm-mcp-candidate/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Nextron Systems Agentic Access](https://apis.io/agentic-access/nextron-systems/nextron-systems-agentic-access/)
+
+#### JSON Schema (5)
+
+The data models the API reads and writes.
+
+- [AsyncResult](https://apis.io/schemas/nextron-systems/nextron-systems-async-result/)
+- [SampleIdObj](https://apis.io/schemas/nextron-systems/nextron-systems-sample-id-obj/)
+- [ThorReport](https://apis.io/schemas/nextron-systems/nextron-systems-thor-report/)
+- [ThunderstormInfo](https://apis.io/schemas/nextron-systems/nextron-systems-thunderstorm-info/)
+- [ThunderstormStatus](https://apis.io/schemas/nextron-systems/nextron-systems-thunderstorm-status/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Nextron Systems Context](https://apis.io/jsonld/nextron-systems/nextron-systems-context/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Nextron Systems Thunderstorm Overlay](https://apis.io/overlays/nextron-systems/nextron-systems-thunderstorm-overlay/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Nextron Systems API Rules](https://apis.io/rules/nextron-systems/nextron-systems-rules/)
+- [Nextron Systems — thunderstorm openapi rules](https://apis.io/rules/nextron-systems/nextron-systems-thunderstorm-openapi-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Nextron Systems Authentication](https://apis.io/security/nextron-systems/nextron-systems-authentication/)
+- [Nextron Systems Domain Security](https://apis.io/security/nextron-systems/nextron-systems-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Nextron Systems Plans Pricing](https://apis.io/plans/nextron-systems/nextron-systems-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Nextron Systems Rate Limits](https://apis.io/rate-limits/nextron-systems/nextron-systems-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.nextron-systems.com/)
+- [Documentation](https://www.nextron-systems.com/resources/manuals/)
+- [Getting started](https://www.nextron-systems.com/get-started/)
+- [Support](https://support.nextron-systems.com/)
+- [Blog](https://www.nextron-systems.com/blog/)
+- [Privacy policy](https://www.nextron-systems.com/privacy/)
+- [GitHub](https://github.com/NextronSystems)
+
+## API Evangelist rating
+
+**Kin Score 39.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 51.6 |
+| Contract governance | 14.4 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 56.5 |
+| Access clarity | 23.7 |
+
+**Agent readiness 21.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/nextron-systems/](https://apis.io/providers/nextron-systems/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Nextron Systems: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/nextron-systems/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
